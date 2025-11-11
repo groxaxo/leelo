@@ -320,6 +320,7 @@ function Doc(source, onEnd) {
       pitch: settings.pitch || defaults.pitch,
       volume: settings.volume || defaults.volume,
       lang: config.langMap[lang] || lang || 'en-US',
+      openaiChunkingMode: settings.openaiChunkingMode || "punctuation",
     }
     const voice = await getSpeechVoice(settings.voiceName, options.lang)
     if (!voice) throw new Error(JSON.stringify({code: "error_no_voice", lang: options.lang}));

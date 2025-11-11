@@ -54,7 +54,33 @@ function Speech(texts, options) {
     else {
       if (isGoogleTranslate(options.voice)) return new CharBreaker(200, punctuator).breakText(text);
       else if (isPiperVoice(options.voice)) return [text];
+      else if (isOpenai(options.voice)) {
+        // For OpenAI voices, use user-configurable chunking mode from options
+        const chunkingMode = options.openaiChunkingMode || "punctuation";
+        return getOpenaiChunks(text, chunkingMode, punctuator);
+      }
       else return new CharBreaker(750, punctuator, 200).breakText(text);
+    }
+  }
+
+  function getOpenaiChunks(text, mode, punctuator) {
+    switch (mode) {
+      case "punctuation":
+        // Split by sentences, similar to Open WebUI
+        return punctuator.getSentences(text).map(s => s.trim()).filter(s => s.length > 0);
+      case "paragraphs":
+        // Split by paragraphs
+        return punctuator.getParagraphs(text).map(p => p.trim()).filter(p => p.length > 0);
+      case "none":
+        // Send entire text as one chunk (but respect char limit for very long texts)
+        if (text.length > 4000) {
+          // For very long texts, still break by sentences to avoid API limits
+          return punctuator.getSentences(text).map(s => s.trim()).filter(s => s.length > 0);
+        }
+        return [text];
+      default:
+        // Default to punctuation-based chunking
+        return punctuator.getSentences(text).map(s => s.trim()).filter(s => s.length > 0);
     }
   }
 

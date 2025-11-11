@@ -23,6 +23,23 @@
     <div id="advanced-options">
       <input type="checkbox" id="fix-bt-silence-gap"
       ><label for="fix-bt-silence-gap">Fix missing first few words of each paragraph when using Bluetooth headset</label>
+      
+      <div style="margin-top: 20px;">
+        <h4>OpenAI TTS Chunking Mode</h4>
+        <p style="color: #6c757d; font-size: 0.9em;">Choose how text is split when using OpenAI voices (like Open WebUI)</p>
+        <div>
+          <input type="radio" id="chunking-punctuation" name="openai-chunking" value="punctuation">
+          <label for="chunking-punctuation">Split by Punctuation (sentences) - Recommended</label>
+        </div>
+        <div>
+          <input type="radio" id="chunking-paragraphs" name="openai-chunking" value="paragraphs">
+          <label for="chunking-paragraphs">Split by Paragraphs</label>
+        </div>
+        <div>
+          <input type="radio" id="chunking-none" name="openai-chunking" value="none">
+          <label for="chunking-none">No Chunking (send entire text)</label>
+        </div>
+      </div>
     </div>
   </div>
 </body>
