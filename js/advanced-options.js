@@ -10,4 +10,13 @@ Promise.all([getSettings(), domReady()]).then(([settings]) => {
       updateSettings({fixBtSilenceGap: this.checked})
         .catch(console.error)
     })
+
+  // OpenAI Chunking Mode
+  const chunkingMode = settings.openaiChunkingMode || "punctuation"
+  $(`input[name="openai-chunking"][value="${chunkingMode}"]`).prop("checked", true)
+  
+  $('input[name="openai-chunking"]').change(function() {
+    updateSettings({openaiChunkingMode: this.value})
+      .catch(console.error)
+  })
 })

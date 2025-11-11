@@ -97,6 +97,9 @@ You can change the voice, reading speed, pitch, or enable text highlighting:
 ### Using Premium Voices
 [Using Premium Voices (Google Wavenet & Amazon Polly)](docs/usage/premium-voices.md)
 
+### Using OpenAI & Compatible TTS
+[Using OpenAI and OpenAI-Compatible TTS (Open WebUI, LocalAI, etc.)](docs/usage/openai-tts.md)
+
 
 ## Installation
 
